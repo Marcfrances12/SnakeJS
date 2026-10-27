@@ -1,0 +1,158 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+:root {
+    --fondo: #231b3a;
+    --marco: #120d22;
+    --celda: #3a2f5c;
+    --panel: #2f2650;
+    --borde-panel: #6b5aa3;
+    --texto: #f3eefc;
+    --texto-suave: #b9aee0;
+    --titulo: #ffd23f;
+    --serpiente: #00FF00;
+    --boton: #ffd23f;
+    --boton-sombra: #b8861b;
+    --fuente: 'Press Start 2P', 'Courier New', monospace;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--fondo);
+    color: var(--texto);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 24px 16px;
+    gap: 18px;
+    font-family: var(--fuente);
+}
+
+/* ---------- Título ---------- */
+h2 {
+    margin: 0;
+    font-size: 32px;
+    font-weight: normal;
+    letter-spacing: 6px;
+    color: var(--titulo);
+    text-shadow: 4px 4px 0 var(--marco);
+}
+
+/* ---------- Récord y longitud ---------- */
+.stats {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#puntumax,
+#logitud {
+    margin: 0;
+    padding: 10px 14px;
+    min-width: 150px;
+    text-align: center;
+    font-size: 10px;
+    line-height: 1.4;
+    background-color: var(--panel);
+    border: 3px solid var(--borde-panel);
+    box-shadow: 0 4px 0 var(--marco);
+}
+
+#puntumax {
+    color: var(--titulo);
+}
+
+/* ---------- Tablero ---------- */
+#grid {
+    /* Tamaño de celda: el que quepa en la pantalla, con un máximo de 30px */
+    --celda-tam: clamp(
+        6px,
+        calc(min(100vw - 40px, 100dvh - 300px) / var(--tamaño) - 2px - 20px / var(--tamaño)),
+        30px
+    );
+
+    display: grid;
+    grid-template-columns: repeat(var(--tamaño), var(--celda-tam));
+    grid-template-rows: repeat(var(--tamaño), var(--celda-tam));
+    gap: 2px;
+    background-color: var(--marco);
+    padding: 6px;
+    border: 4px solid var(--borde-panel);
+    box-shadow: 0 8px 0 var(--marco);
+}
+
+.cell {
+    background-color: var(--celda);
+}
+
+/* ---------- Serpiente ---------- */
+.snake {
+    background-color: var(--serpiente);
+    box-shadow: inset 0 calc(var(--celda-tam) * -0.13) 0 rgba(0, 0, 0, 0.22);
+}
+
+.head {
+    background-image: url(imagenes/serp.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+}
+
+/* ---------- Manzana ---------- */
+.apple {
+    background-image: url(imagenes/poma.png);
+    background-size: 130%;
+    background-repeat: no-repeat;
+    background-position: center;
+    image-rendering: pixelated;
+}
+
+/* ---------- Mensajes ---------- */
+#msg {
+    margin: 0;
+    max-width: 340px;
+    text-align: center;
+    font-size: 10px;
+    line-height: 1.8;
+    color: var(--texto-suave);
+}
+
+/* ---------- Botón de reinicio ---------- */
+#reset-btn {
+    font-family: var(--fuente);
+    font-size: 12px;
+    color: var(--marco);
+    background-color: var(--boton);
+    border: 3px solid var(--marco);
+    padding: 12px 20px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 var(--boton-sombra);
+    transition: transform 0.08s, box-shadow 0.08s;
+}
+
+#reset-btn:hover {
+    background-color: #ffe27a;
+}
+
+#reset-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 var(--boton-sombra);
+}
+
+#reset-btn:focus-visible {
+    outline: 3px solid var(--texto);
+    outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #reset-btn {
+        transition: none;
+    }
+}
